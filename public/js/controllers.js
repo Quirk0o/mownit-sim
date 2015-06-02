@@ -3,9 +3,7 @@ angular.module('simApp')
 
     .controller('InputController', [ '$scope', 'CSVParse', function ($scope, CSVParse) {
 
-      this.getProgress = function () {
-        return 0;
-      };
+      this.getProgress = CSVParse.getProgress;
 
       var self = this;
       $scope.$watch(angular.bind(this, function () {
@@ -19,9 +17,6 @@ angular.module('simApp')
         var file = files[0];
 
         CSVParse.parse(file);
-        self.getProgress = function () {
-          return 100;
-        };
       };
     }])
 

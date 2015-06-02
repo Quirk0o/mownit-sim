@@ -37,7 +37,8 @@ angular.module('simApp')
 
     .factory('CSVParse', function () {
 
-      var listeners = [];
+      var listeners = [],
+          progress = 0;
 
       var config = {
         delimiter: '',
@@ -48,6 +49,7 @@ angular.module('simApp')
         complete: function (res) {
           data = res.data;
           headers = res.meta.fields;
+          progress = 100;
           listeners.forEach(function (callback) {
             callback(data, headers);
           });
@@ -68,6 +70,9 @@ angular.module('simApp')
         },
         getData: function () {
           return data;
+        },
+        getProgress: function () {
+          return progress;
         }
       };
     })
