@@ -60,13 +60,18 @@ angular.module('simApp')
       };
 
       var data, headers;
+      var interval;
 
       return {
         parse: function (file) {
+          interval = setInterval(function () {
+            if (progress < 99) progress++;
+          }, 100);
           Papa.parse(file, config);
         },
         success: function (callback) {
           listeners.push(callback);
+          clearInterval(interval);
         },
         getData: function () {
           return data;

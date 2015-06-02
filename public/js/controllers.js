@@ -45,7 +45,8 @@ angular.module('simApp')
         netdif.forEach(function (header) {
           var series = {
             data: [],
-            name: header
+            name: header,
+            visible: header.indexOf('iemas_fitness') >= 0
           };
           data.forEach(function (row) {
             series.data.push(row[header]);
@@ -64,7 +65,7 @@ angular.module('simApp')
             var series = {
               data: [],
               name: 'net_' + header,
-              visible: show,
+              visible: show
             };
 
             var guide = {
@@ -88,7 +89,7 @@ angular.module('simApp')
               var series = {
                 data: [],
                 name: output,
-                visible: show
+                visible: output.indexOf('iemas_fitness') >= 0
               };
               show = false;
 
