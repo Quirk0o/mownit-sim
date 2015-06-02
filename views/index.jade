@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    main.row(ng-app='simApp')
+        .small-12.columns
+            h1 Predykcja wyników z użyciem sieci neuronowych
+
+            form(enctype='multipart/form-data' ng-controller='InputController as input')
+                .row
+                    input#file.small-12.columns(
+                        type='file'
+                        ng-model='input.files'
+                        ngf-select
+                    )
+                .row
+                    #drop.small-12.columns(
+                        ng-model='input.files'
+                        ngf-drop
+                        ngf-select
+                        ngf-drag-over-class='dragover'
+                    )
+                        p(ng-if='!input.files') Drop input file here
+                        p {{ input.files[0].name }}
+                .row
+                    .progress.small-12.round
+                        span.right {{ input.getProgress() }} %
+                        span.meter(
+                            style='width: {{ input.getProgress() }}%'
+                        )
+
+            section.row(ng-controller='ChartController as display')
+                div.row(ng-repeat='chart in display.charts')
+                    highchart.small-12.columns(
+                        ng-if='chart.config.series.length'
+                        config='chart.config'
+                    )

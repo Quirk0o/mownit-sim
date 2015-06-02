@@ -1,0 +1,11 @@
+doctype html
+html
+    head
+        title= title
+        include stylesheets.jade
+    body
+        block content
+
+        if process.env.NODE_ENV === 'dev'
+            script(src='//localhost:35729/livereload.js')
+        include scripts.jade
