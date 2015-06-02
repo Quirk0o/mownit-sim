@@ -50,8 +50,7 @@ angular.module('simApp')
         netdif.forEach(function (header) {
           var series = {
             data: [],
-            name: header,
-            visible: header === 'netdif_iemas_fitness'
+            name: header
           };
           data.forEach(function (row) {
             series.data.push(row[header]);
@@ -65,11 +64,12 @@ angular.module('simApp')
         input.forEach(function (header) {
           var chart = HighChart.mkchart('scatter', header, []);
 
+          var show = true;
           if (output.indexOf('net_' + header) >= 0) {
             var series = {
               data: [],
               name: 'net_' + header,
-              visible: header === 'net_iemas_fitness'
+              visible: show,
             };
 
             var guide = {
